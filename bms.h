@@ -11,6 +11,7 @@
 #define MIN_VOLTAGE 3.00
 #define MAX_TEMP    60.0
 #define MIN_TEMP    0.0
+#define MIN_SOC     5.0
 
 /* --- SYSTEM STATES (FINITE STATE MACHINE) --- */
 typedef enum {
@@ -25,9 +26,9 @@ typedef struct {
     float cell_voltages[CELL_COUNT];  /* Array holding voltage for all 100 cells */
     float pack_current;               /* Current in Amperes: (+) Charging, (-) Discharging */
     float temperature;                /* Overall pack temperature in Celsius */
-    
+    float soc;                        /*state of charge percentage*/
     BMS_State_t current_state;        /* Current operational state of the vehicle */
-    int fault_code;                   /* 0 = System OK, 1 = Over-Volt, 2 = Under-Volt, 3 = Over-Temp */
+    int fault_code;                   /* 0 = System OK, 1 = Over-Volt, 2 = Under-Volt, 3 = Over-Temp, 4 = Under-Temp, 5  = Low-SOC*/
 } BMS_Handle_t;
 
 /* --- FUNCTION PROTOTYPES (THE INTERFACE) --- */
